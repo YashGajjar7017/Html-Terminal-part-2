@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        .terminal {
+            width: 100%;
+            /* height: 190%; */
+            background-color: #000;
+            color: #fff
+        }
+        .btn{
+            margin-left: 50%;
+        }
+    </style>
+    <title>Document</title>
+</head>
+
+<body>
+    <textarea class="terminal" rows="20" id="terminal"></textarea><br>
+    <button class="btn btn-primary" id="btnSubmit" type="button">Send</button>
+</body>
+<script>
+    $('#btnSubmit').click(function () {
+        var terminal = $('#terminal');
+        var stdin = terminal.val();
+        console.log(stdin);
+        // document.getElementsByClassName("terminal").innerText = "[User%(Html) : ]"
+        //Get stdout (FAKE FOR THE EXAMPLE)    
+        terminal.append(stdout() + '<br>');
+    });
+
+// --------------------------------------------------------
+    function stdout(stdin) {
+        // return "root@192.168.2.1:/"
+        return "Coder's Machine : "
+    }
+    
+// --------------------------------------------------------
+    $(function() {
+    $('.terminal').on('click', function() {
+        $('#input').focus();
+    });
+
+    $('#input').on('keydown', function search(e) {
+        if (e.keyCode == 13) {
+            // append your output to the history,
+            // here I just append the input
+            $('#history').append($(this).val() + '<br/>');
+
+            // you can change the path if you want
+            // crappy implementation here, but you get the idea
+            if ($(this).val().substring(0, 3) === 'cd ') {
+                $('#path').html($(this).val().substring(3) + '&nbsp;>&nbsp;');
+            }
+
+            // clear the input
+            $('#input').val('');
+
+        }
+    });
+});
+</script>
+
+</html>
